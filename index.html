@@ -260,7 +260,15 @@
     }
 
     startPauseBtn.addEventListener('click', () => ticking ? pauseTimer() : startTimer());
-    resetBtn.addEventListener('click', resetTimer);
+    resetBtn.addEventListener('click', () => {
+      resetTimer();
+      question.value = "";
+      answer.value = "";
+      lastSavedQ.textContent = "";
+      lastSavedA.textContent = "";
+      localStorage.removeItem(KEY);  // clears autosave
+      updateWordCount();
+    });
 
     // ===== Presets (Task 1 / Task 2 / Custom) =====
     function applyPreset(preset){
@@ -393,6 +401,7 @@
         resetTimer();
       }
     });
+
   </script>
 </body>
 </html>
